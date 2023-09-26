@@ -9,11 +9,12 @@ import SwiftUI
 
 struct OnboardingView: View {
     //MARK: PROPERTIES
+    var fruits: [Fruit] = fruitsData
     
     //MARK: BODY
     var body: some View {
         TabView {
-            ForEach(fruitsData) {fruit in
+            ForEach(fruits) {fruit in
                 FruitCardView(fruit: fruit)
                 
             } //: LOOP
