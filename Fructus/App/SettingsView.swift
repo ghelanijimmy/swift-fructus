@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     //MARK: - PROPERTIES
     @Environment(\.dismiss) var dismiss
+    @AppStorage("isOnboarding") var isOnboarding: Bool = false
     
     //MARK: - BODY
     var body: some View {
@@ -36,6 +37,33 @@ struct SettingsView: View {
                         } //: HSTACK
                     }
                     //MARK: - SECTION 2
+                    GroupBox(
+                        label: SettingsLabelView(labelText: "Customization", labelImage: "paintbrush"),
+                        content: {
+                            Divider().padding(.vertical, 4)
+                            Text("If you wish, you can restart the application by toggling the switch in this box. That way it starts the onboarding process and you will see the welcome scren again.")
+                                .padding(.vertical, 8)
+                                .frame(minHeight: 60)
+                                .layoutPriority(1)
+                                .font(.footnote)
+                                .multilineTextAlignment(.leading)
+                            
+                            Toggle(isOn: $isOnboarding, label: {
+                                if isOnboarding {
+                                    Text("Restarted".uppercased())
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.green)
+                                } else {
+                                    Text("Restart".uppercased())
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.secondary)
+                                }
+                            })
+                            .padding()
+                            .background(Color(UIColor.tertiarySystemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        }
+                    )
                     
                     //MARK: - SECTION 3
                     GroupBox(
